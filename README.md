@@ -19,9 +19,9 @@ You should have  `composer` installed. If you don't install composer from [here]
 
 ### Installing
 1. Download the zipped file and unzip it or Clone it
-		```sh
-		git clone https://github.com/mohamedegila/ToDoListApp_BackEnd.git
-		```
+	```sh
+	git clone https://github.com/mohamedegila/ToDoListApp_BackEnd.git
+	```
 2. cd inside the project
     ```sh
     cd ToDoListApp_BackEnd
@@ -53,7 +53,7 @@ You should have  `composer` installed. If you don't install composer from [here]
     ```sh
     php artisan serve
     ```
-11. Open your browser on this url ``` http://localhost:8000```
+<!-- 11. Open your browser on this url ``` http://localhost:8000``` -->
 
 ### License
 MIT License

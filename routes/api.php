@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ToDoListController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix'=>'v1/items'], function () {
+    Route::get('', [ToDoListController::class,'index']);
+    Route::post('', [ToDoListController::class,'store']);
+    Route::get('/{id}', [ToDoListController::class,'edit']);
+    Route::put('/{id}', [ToDoListController::class,'update']);
+    Route::delete('/{id}', [ToDoListController::class,'destroy']);
 });
