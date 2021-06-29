@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use App\Http\Resources\ItemResource;
+use Symfony\Component\HttpFoundation\Response;
+
 use App\Models\item;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,15 @@ class ToDoListController extends Controller
      */
     public function index()
     {
-        return "Index...";
+        // return items even if it soft deleted
+        // $item = item::withTrashed()->paginate(5);
+        $item = item::paginate(5);
+
+        $count = Item::where('deleted_at', '=', null)->where('completed', 1)
+        ->count();
+
+        $data = ["status" => 200, 'completed'=>$count,'data' =>  $item];
+        return response()->json($data, Response::HTTP_OK);
     }
 
 
@@ -31,7 +41,7 @@ class ToDoListController extends Controller
     public function store(StoreItemRequest $request)
     {
         $item = item::create($request->all());
-        $data = ['status' => 'success', 'data' =>  new ItemResource($item)];
+        $data = ["status" => 200, 'data' =>  new ItemResource($item)];
         return response()->json($data);
         // return new ItemResource($item);
     }
@@ -71,7 +81,29 @@ class ToDoListController extends Controller
     public function destroy(Item $item)
     {
         $item->delete();
-        $data = ['status' => 'success'];
+        $data = ['status' => 200];
+        return response()->json($data);
+    }
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+    public function toggleCompleted($id)
+    {
+        $item = Item::findOrFail($id);
+        $completed = !$item->completed;
+        if ($completed) {
+            $item->completed = $completed;
+            $item->completed_at = now();
+        } else {
+            $item->completed = $completed;
+            $item->completed_at = null;
+        }
+        $item->save();
+        $data = ['status' => 200,'item'=>$item ];
         return response()->json($data);
     }
 }

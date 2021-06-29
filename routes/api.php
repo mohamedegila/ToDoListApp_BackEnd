@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::group(['prefix'=>'v1/items'], function () {
-    Route::get('', [ToDoListController::class,'index']);
-    Route::post('', [ToDoListController::class,'store']);
-    Route::get('/{item}', [ToDoListController::class,'edit']);
-    Route::put('/{id}', [ToDoListController::class,'update']);
-    Route::delete('/{item}', [ToDoListController::class,'destroy']);
+    Route::get('', [ToDoListController::class,'index'])->name('item.index');
+});
+Route::group(['prefix'=>'v1/item'], function () {
+    Route::get('{id}/change-state', [ToDoListController::class,'toggleCompleted'])->name('item.change-state');
+    Route::post('/store', [ToDoListController::class,'store'])->name('item.store');
+    Route::get('/{item}', [ToDoListController::class,'edit'])->name('item.edit');
+    Route::put('/{id}', [ToDoListController::class,'update'])->name('item.update');
+    Route::delete('/{item}', [ToDoListController::class,'destroy'])->name('item.destroy');
 });
