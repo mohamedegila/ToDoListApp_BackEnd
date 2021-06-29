@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix'=>'v1/items'], function () {
     Route::get('', [ToDoListController::class,'index']);
     Route::post('', [ToDoListController::class,'store']);
-    Route::get('/{id}', [ToDoListController::class,'edit']);
+    Route::get('/{item}', [ToDoListController::class,'edit']);
     Route::put('/{id}', [ToDoListController::class,'update']);
-    Route::delete('/{id}', [ToDoListController::class,'destroy']);
+    Route::delete('/{item}', [ToDoListController::class,'destroy']);
 });
