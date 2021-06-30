@@ -68,7 +68,7 @@ class ToDoListController extends Controller
     {
         $item = Item::findOrFail($id);
         $item->update($request->all());
-        $data = ['status' => 'success', 'data' =>  new ItemResource($item)];
+        $data = ['status' => 200, 'data' =>  new ItemResource($item)];
         return response()->json($data);
     }
 

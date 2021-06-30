@@ -25,7 +25,7 @@ class UpdateItemRequest extends FormRequest
     {
         return [
 
-            'name'=> ['required','min:10','unique:items,name,'.$this->item]
+            'name'=> ['required','min:10','unique:items,name,'.$this->id]
         ];
     }
 }
