@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class item extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;  //No need for soft delete in this task
     /**
      * Table name.
      *

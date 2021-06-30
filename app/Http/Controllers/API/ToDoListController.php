@@ -22,9 +22,10 @@ class ToDoListController extends Controller
     {
         // return items even if it soft deleted
         // $item = item::withTrashed()->paginate(5);
+
         $item = item::paginate(5);
 
-        $count = Item::where('deleted_at', '=', null)->where('completed', 1)
+        $count = Item::where('completed', 1)
         ->count();
 
         $data = ["status" => 200, 'completed'=>$count,'data' =>  $item];
@@ -43,7 +44,6 @@ class ToDoListController extends Controller
         $item = item::create($request->all());
         $data = ["status" => 200, 'data' =>  new ItemResource($item)];
         return response()->json($data);
-        // return new ItemResource($item);
     }
 
     /**
