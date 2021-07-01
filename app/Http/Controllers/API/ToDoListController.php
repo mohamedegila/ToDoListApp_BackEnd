@@ -66,10 +66,15 @@ class ToDoListController extends Controller
      */
     public function update(UpdateItemRequest $request, $id)
     {
-        $item = Item::findOrFail($id);
-        $item->update($request->all());
-        $data = ['status' => 200, 'data' =>  new ItemResource($item)];
-        return response()->json($data);
+        $item = Item::find($id);
+        if ($item) {
+            $item->update($request->all());
+            $data = ['status' => 200, 'data' =>  new ItemResource($item)];
+            return response()->json($data);
+        } else {
+            $data = ['status' => 404,"message"=>"Not found"];
+            return response()->json($data, Response::HTTP_NOT_FOUND);
+        }
     }
 
     /**
