@@ -42,8 +42,8 @@ class ToDoListController extends Controller
     public function store(StoreItemRequest $request)
     {
         $item = item::create($request->all());
-        $data = ["status" => 200, 'data' =>  new ItemResource($item)];
-        return response()->json($data);
+        $data = ["status" => 201, 'data' =>  new ItemResource($item)];
+        return response()->json($data, Response::HTTP_CREATED);
     }
 
     /**

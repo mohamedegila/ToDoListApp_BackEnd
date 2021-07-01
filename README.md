@@ -38,20 +38,32 @@ You should have  `composer` installed. If you don't install composer from [here]
     ```sh
     cp .env.example .env
     ```
-6. Generate an app encryption key
+6. Create a copy of your .env.testing file
+    ```sh
+    cp .env.example .env.testing
+    ```
+7. Generate an app encryption key
     ```sh
     php artisan key:generate
     ```
-7. Create an empty database for our application in your DBMS
-8. In the .env file, add database information to allow Laravel to connect to the database
-9. Migrate the database
+
+8. Copy key and put it into .env.testing key
+
+9. Create an empty database for our application in your DBMS
+10. In the .env file, add database information to allow Laravel to connect to the database
+11. In the .env.testing file, add database information to allow Laravel to connect to the database
+12. Migrate the database
     ```sh
     php artisan migrate
     ```
 
-10. Open up the server
+13. Open up the server
     ```sh
     php artisan serve
+    ```
+14. Run unit test 
+    ```sh
+    php artisan test
     ```
 <!-- 11. Open your browser on this url ``` http://localhost:8000``` -->
 
