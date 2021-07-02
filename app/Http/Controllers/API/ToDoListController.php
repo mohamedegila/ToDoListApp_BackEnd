@@ -23,7 +23,7 @@ class ToDoListController extends Controller
         // return items even if it soft deleted
         // $item = item::withTrashed()->paginate(5);
 
-        $item = item::paginate(5);
+        $item = item::orderBy('created_at', 'DESC')->paginate(5);
 
         $count = Item::where('completed', 1)
         ->count();
